@@ -1,0 +1,14 @@
+{
+  "scripts": {
+    "start": "node index.js",
+    "start:dev": "nodemon index.js"
+  },
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "download-file": "^0.1.5",
+    "node-aplay": "^1.0.3",
+    "node-telegram-bot-api": "^0.30.0",
+    "nodemon": "^2.0.6",
+    "pi-temperature": "^2.1.0"
+  }
+}
