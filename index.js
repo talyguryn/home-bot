@@ -6,6 +6,9 @@ require('dotenv').config();
 const TelegramBot = require('node-telegram-bot-api');
 const rpiTemp = require('pi-temperature');
 const Sound = require('node-aplay');
+const path = require('path');
+const fs = require('fs');
+const ffmpeg = require('./ffmpeg');
 
 const BOT_TOKEN = process.env.BOT_TOKEN;
 const ADMIN_CHAT = process.env.ADMIN_CHAT;
@@ -58,4 +61,32 @@ bot.on('message', (msg) => {
     if (chatId !== ADMIN_CHAT) {
         bot.forwardMessage(ADMIN_CHAT, msg.chat.id, msg.message_id);
     }
+});
+
+bot.on('voice', async (msg) => {
+    const chatId = msg.chat.id;
+    const downloadsDir = path.join(__dirname, 'downloads');
+
+    if (!fs.existsSync(downloadsDir)) {
+        fs.mkdirSync(downloadsDir, { recursive: true });
+    }
+
+    const name = await bot.downloadFile(msg.voice.file_id, downloadsDir);
+
+    ffmpeg(name)
+        .outputOption([
+            '-y'
+        ])
+        .on('end', async function(stdout, stderr) {
+            console.log('Transcoding succeeded!');
+
+            const bell = new Sound(`${name}.wav`);
+
+            bell.play();
+            bell.on('complete', function () {
+                console.log('Done with playback!');
+                bot.sendMessage(chatId, 'Nice to hear you!');
+            });
+        })
+        .save(`${name}.wav`);
 });
