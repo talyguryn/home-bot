@@ -53,14 +53,6 @@ bot.onText(/\/coin/, (msg, match) => {
     });
 });
 
-bot.onText(/\/light/, (msg, match) => {
-    const chatId = msg.chat.id;
-
-    require('./gpio');
-
-    bot.sendMessage(chatId, 'Done!');
-});
-
 bot.on('message', (msg) => {
     const chatId = msg.chat.id;
 
@@ -96,4 +88,28 @@ bot.on('voice', async (msg) => {
             });
         })
         .save(`${name}.wav`);
+});
+
+
+const PORT = 4;
+var Gpio = require('onoff').Gpio;
+var LED = new Gpio(PORT, 'out');
+
+function toggleLED() { //function to start blinking
+    if (LED.readSync() === 0) { //check the pin state, if the state is 0 (or off)
+        LED.writeSync(1); //set pin state to 1 (turn LED on)
+    } else {
+        LED.writeSync(0); //set pin state to 0 (turn LED off)
+    }
+}
+
+bot.onText(/\/light/, (msg, match) => {
+    const chatId = msg.chat.id;
+    const lightState = LED.readSync();
+
+    LED.writeSync(lightState === 0 ? 1 : 0);
+
+    const message = lightState === 0 ? 'Light is turned on!' : 'Light is turned off!'
+
+    bot.sendMessage(chatId, message);
 });
