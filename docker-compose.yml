@@ -9,4 +9,5 @@ services:
     devices:
       - '/dev/snd:/dev/snd'
       - /dev/gpiomem:/dev/gpiomem
+      - /sys
     working_dir: /usr/src/app
