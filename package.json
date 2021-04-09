@@ -12,6 +12,7 @@
     "node-aplay": "^1.0.3",
     "node-telegram-bot-api": "^0.30.0",
     "nodemon": "^2.0.6",
+    "onoff": "^6.0.2",
     "pi-temperature": "^2.1.0"
   }
 }

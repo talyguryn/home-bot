@@ -7,5 +7,6 @@ services:
     volumes:
       - '.:/usr/src/app'
     devices:
-      - '/dev/snd'
+      - '/dev/snd:/dev/snd'
+      - '/sys:/sys'
     working_dir: /usr/src/app

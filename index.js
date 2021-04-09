@@ -10,10 +10,9 @@ const path = require('path');
 const fs = require('fs');
 const ffmpeg = require('./ffmpeg');
 
+
 const BOT_TOKEN = process.env.BOT_TOKEN;
 const ADMIN_CHAT = process.env.ADMIN_CHAT;
-
-
 const bot = new TelegramBot(BOT_TOKEN, {polling: true});
 
 bot.on('polling_error', function(error){ console.log(error); });
@@ -47,12 +46,13 @@ bot.onText(/\/coin/, (msg, match) => {
     const chatId = msg.chat.id;
     const bell = new Sound('coin.wav');
 
+    require('./gpio');
+
     bell.play();
     bell.on('complete', function () {
         console.log('Done with playback!');
         bot.sendMessage(chatId, 'Coin drop!');
     });
-
 });
 
 bot.on('message', (msg) => {
@@ -73,7 +73,8 @@ bot.on('voice', async (msg) => {
 
     const name = await bot.downloadFile(msg.voice.file_id, downloadsDir);
 
-    ffmpeg(name)
+    ffmpeg()
+        .input(name)
         .outputOption([
             '-y'
         ])
