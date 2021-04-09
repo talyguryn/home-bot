@@ -8,6 +8,5 @@ services:
       - '.:/usr/src/app'
     devices:
       - '/dev/snd:/dev/snd'
-      - /sys/devices/platform/soc/3f200000.gpio:/sys/devices/platform/soc/3f200000.gpio
-      - /sys/class/gpio:/sys/class/gpio
+      - /dev/gpiomem:/dev/gpiomem
     working_dir: /usr/src/app
