@@ -46,13 +46,19 @@ bot.onText(/\/coin/, (msg, match) => {
     const chatId = msg.chat.id;
     const bell = new Sound('coin.wav');
 
-    require('./gpio');
-
     bell.play();
     bell.on('complete', function () {
         console.log('Done with playback!');
         bot.sendMessage(chatId, 'Coin drop!');
     });
+});
+
+bot.onText(/\/coin/, (msg, match) => {
+    const chatId = msg.chat.id;
+
+    require('./gpio');
+
+    bot.sendMessage(chatId, 'Done!');
 });
 
 bot.on('message', (msg) => {
