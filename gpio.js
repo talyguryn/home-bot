@@ -1,4 +1,4 @@
-const PORT = 14;
+const PORT = 4;
 
 var Gpio = require('onoff').Gpio; //include onoff to interact with the GPIO
 var LED = new Gpio(PORT, 'out'); //use GPIO pin 4, and specify that it is output
