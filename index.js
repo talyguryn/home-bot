@@ -53,7 +53,7 @@ bot.onText(/\/coin/, (msg, match) => {
     });
 });
 
-bot.onText(/\/coin/, (msg, match) => {
+bot.onText(/\/light/, (msg, match) => {
     const chatId = msg.chat.id;
 
     require('./gpio');
