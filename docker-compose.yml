@@ -8,6 +8,5 @@ services:
       - '.:/usr/src/app'
     devices:
       - '/dev/snd:/dev/snd'
-      - /dev/gpiomem:/dev/gpiomem
-      - /sys
+    privileged: true
     working_dir: /usr/src/app
