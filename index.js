@@ -34,9 +34,9 @@ bot.onText(/\/doorbell/, (msg, match) => {
     const chatId = msg.chat.id;
     const bell = new Sound('doorbell.wav');
 
-    if (chatId !== ADMIN_CHAT) {
-        return;
-    }
+    // if (chatId !== ADMIN_CHAT) {
+    //     return;
+    // }
 
     bell.play();
     bell.on('complete', function () {
@@ -50,9 +50,9 @@ bot.onText(/\/coin/, (msg, match) => {
     const chatId = msg.chat.id;
     const bell = new Sound('coin.wav');
 
-    if (chatId !== ADMIN_CHAT) {
-        return;
-    }
+    // if (chatId !== ADMIN_CHAT) {
+    //     return;
+    // }
 
     bell.play();
     bell.on('complete', function () {
@@ -65,9 +65,9 @@ bot.onText(/\/melody/, (msg, match) => {
     const chatId = msg.chat.id;
     const bell = new Sound('melody.wav');
 
-    if (chatId !== ADMIN_CHAT) {
-        return;
-    }
+    // if (chatId !== ADMIN_CHAT) {
+    //     return;
+    // }
 
     bell.play();
     bell.on('complete', function () {
@@ -87,9 +87,9 @@ bot.on('message', (msg) => {
 bot.on('voice', async (msg) => {
     const chatId = msg.chat.id;
 
-    if (chatId !== ADMIN_CHAT) {
-        return;
-    }
+    // if (chatId !== ADMIN_CHAT) {
+    //     return;
+    // }
 
     const downloadsDir = path.join(__dirname, 'downloads');
 
