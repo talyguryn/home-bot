@@ -1,7 +1,9 @@
 version: '3'
 services:
   app:
-    build: .
+    build:
+      context: .
+      dockerfile: 'docker/Dockerfile'
     restart: unless-stopped
     command: bash -c "yarn && yarn start:dev"
     volumes:
